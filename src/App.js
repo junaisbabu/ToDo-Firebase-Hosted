@@ -13,7 +13,10 @@ function App() {
   const [input, setInput] = useState('')
   console.log(input)
 
+
+    // when the app loads, we need to listen to the database and fetch. new todos as they get added / removed
   useEffect(() => {
+    // this code here... fires when the app.js loads
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
       // console.log(snapshot.docs.map( doc => doc.data()));
       setTodos(snapshot.docs.map( doc => ({ id: doc.id, todo: doc.data().todo}) ))
@@ -22,6 +25,7 @@ function App() {
 
 
   const addTodo = event => {
+    // this will fire off when we click the button
     event.preventDefault();  // will stop refreshing
     console.log('Im working...');
     // setTodos([...todos, input]);
@@ -42,7 +46,7 @@ function App() {
      <form>
        <FormControl>
        <InputLabel>
-         ✅ Write Todo
+         📝 Write Todo
        </InputLabel>
 
        <Input value={input} onChange={event => setInput(event.target.value)} />
